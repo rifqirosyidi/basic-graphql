@@ -8,4 +8,4 @@ const mahasiswaSchema = new Schema({
     jurusanId: String
 })
 
-module.export = mongoose.model('mahasiswa', mahasiswaSchema)
+module.exports = mongoose.model('Mahasiswa', mahasiswaSchema)

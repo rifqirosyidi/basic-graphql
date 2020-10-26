@@ -6,4 +6,4 @@ const jurusanSchema = new Schema({
     kaprodi: String
 })
 
-module.export = mongoose.model('jurusan', jurusanSchema)
+module.exports = mongoose.model('Jurusan', jurusanSchema)
