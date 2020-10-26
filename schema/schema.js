@@ -1,6 +1,13 @@
 const graphql = require('graphql')
 const _ = require('lodash')
-const { GraphQLObjectType, GraphQLString, GraphQLInt, GraphQLSchema, GraphQLID } = graphql
+const { 
+    GraphQLObjectType, 
+    GraphQLString, 
+    GraphQLInt, 
+    GraphQLSchema, 
+    GraphQLID,
+    GraphQLList
+} = graphql
 
 let list_jurusan = [
     { id: "1", jurusan: "Research Nurse", kaprodi: "Grafham"},
@@ -73,7 +80,13 @@ const jurusanType = new GraphQLObjectType({
     fields: () => ({
         id: { type: GraphQLID },
         jurusan: { type: GraphQLString },
-        kaprodi: { type: GraphQLString }
+        kaprodi: { type: GraphQLString },
+        mahasiswa: { 
+            type: new GraphQLList(mahasiswaType),
+            resolve(parent, args) {
+                return _.filter(list_mahasiswa, {jurusanId: parent.id })
+            }
+        }
     })
 })
 
