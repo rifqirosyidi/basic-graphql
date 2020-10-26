@@ -121,6 +121,18 @@ const rootQuery = new GraphQLObjectType({
             resolve(parent, args) {
                 return _.find(list_mahasiswa, {id: args.id})
             }
+        },
+        all_prodi: {
+            type: new GraphQLList(jurusanType),
+            resolve(parent, args) {
+                return list_jurusan
+            }
+        },
+        all_mahasiswa: {
+            type: new GraphQLList(mahasiswaType),
+            resolve(parent, args) {
+                return list_mahasiswa
+            }
         }
     }
 })
