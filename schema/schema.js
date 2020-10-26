@@ -6,7 +6,8 @@ const {
     GraphQLInt, 
     GraphQLSchema, 
     GraphQLID,
-    GraphQLList
+    GraphQLList,
+    GraphQLNonNull
 } = graphql
 
 // Models
@@ -90,8 +91,8 @@ const Mutation = new GraphQLObjectType({
         addJurusan: {
             type: jurusanType,
             args: {
-                jurusan: { type: GraphQLString },
-                kaprodi: { type: GraphQLString }
+                jurusan: { type: new GraphQLNonNull(GraphQLString) },
+                kaprodi: { type: new GraphQLNonNull(GraphQLString) }
             },
             resolve(parent, args) {
                 let jurusan = new Jurusan({
@@ -104,9 +105,9 @@ const Mutation = new GraphQLObjectType({
         addMahasiswa: {
             type: mahasiswaType,
             args: {
-                nama: { type: GraphQLString },
-                umur: { type: GraphQLInt },
-                jurusanId: { type: GraphQLID }
+                nama: { type: new GraphQLNonNull(GraphQLString) },
+                umur: { type: new GraphQLNonNull(GraphQLInt) },
+                jurusanId: { type: new GraphQLNonNull(GraphQLID) }
             },
             resolve(parent, args) {
                 let mahasiswa = new Mahasiswa({
