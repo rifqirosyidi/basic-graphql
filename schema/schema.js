@@ -25,6 +25,7 @@ const jurusanType = new GraphQLObjectType({
             type: new GraphQLList(mahasiswaType),
             resolve(parent, args) {
                 // return _.filter(list_mahasiswa, {jurusanId: parent.id })
+                return Mahasiswa.find({jurusanId: parent.id})
             }
         }
     })
@@ -40,6 +41,7 @@ const mahasiswaType = new GraphQLObjectType({
             type: jurusanType,
             resolve(parent, args) {
                 // return _.find(list_jurusan, { id: parent.jurusanId })
+                return Jurusan.findById(parent.jurusanId)
             }
          }
     })
@@ -53,6 +55,7 @@ const rootQuery = new GraphQLObjectType({
             args: { id: { type: GraphQLID }},
             resolve(parent, args) {
                 // return _.find(list_jurusan, {id: args.id})
+                return Jurusan.findById(args.id)
             }
         },
         mahasiswa: {
@@ -60,18 +63,21 @@ const rootQuery = new GraphQLObjectType({
             args: { id: { type: GraphQLID }},
             resolve(parent, args) {
                 // return _.find(list_mahasiswa, {id: args.id})
+                return Mahasiswa.findById(args.id)
             }
         },
         all_prodi: {
             type: new GraphQLList(jurusanType),
             resolve(parent, args) {
                 // return list_jurusan
+                return Jurusan.find({})
             }
         },
         all_mahasiswa: {
             type: new GraphQLList(mahasiswaType),
             resolve(parent, args) {
                 // return list_mahasiswa
+                return Mahasiswa.find({})
             }
         }
     }
